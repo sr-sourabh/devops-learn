@@ -1,0 +1,42 @@
+<script>
+    window.onload = function () {
+        showIfPowerSelected();
+    };
+
+    function showIfPowerSelected() {
+        var selectedValue = document.getElementById("selected-operation");
+        var baseField = document.getElementById("base-field");
+        if (selectedValue.value === "4") {
+            baseField.style.visibility = 'visible';
+        } else {
+            baseField.style.visibility = 'hidden';
+        }
+    }
+</script>
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator App</title>
+</head>
+<body>
+<form action="#" th:action="@{/getResult}" th:object="${request}" method="post">
+
+    <input type="number" th:field="*{number}"/>
+    <input type="number" th:field="*{base}" id="base-field"/>
+    <select th:field="*{operation}" id="selected-operation" onchange="showIfPowerSelected()">
+        <option th:value="1" th:text="Log"></option>
+        <option th:value="2" th:text="'Square Root'"></option>
+        <option th:value="3" th:text="'Factorial'"></option>
+        <option th:value="4" th:text="'Power'"></option>
+    </select>
+    <input type="submit" value="Submit"/>
+    <br>
+</form>
+
+<br>
+<span th:text="${result}"/>
+
+</body>
+</html>
