@@ -11,7 +11,7 @@
     <groupId>com.iiitb</groupId>
     <artifactId>devopscalc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>devopscalc</name>
     <description>Devops project to understand project lifecycle</description>
     <properties>

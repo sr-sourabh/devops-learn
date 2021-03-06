@@ -16,7 +16,7 @@ public class CalculatorController {
     }
 
     @PostMapping(value = "/getResult")
-    public String getName(@ModelAttribute("request") RequestDto request, Model model) {
+    public String getResult(@ModelAttribute("request") RequestDto request, Model model) {
         int op = request.getOperation();
         int number = request.getNumber();
 
