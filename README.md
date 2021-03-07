@@ -34,5 +34,5 @@ docker run --name test  -d  -p 8090:8090 sourabhpayal/devops-learn:latest
 docker logs -f test
 docker inspect -f "{{ .NetworkSettings.IPAddress }}" test
 service sshd status
-docker exec -it test top
+docker exec -it test top 
 ```
