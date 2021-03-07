@@ -35,7 +35,8 @@ pipeline {
          }
          stage('Pushing tags to git'){
             steps{
-                sh 'git branch'
+                sh 'git tag 2021.1.$BUILD_NUMBER'
+                sh 'git push origin 2021.1.$BUILD_NUMBER'
             }
          }
     }
