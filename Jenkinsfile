@@ -1,17 +1,31 @@
 pipeline {
-     agent any
-     stages {
+    environment {
+            registry = "sourabhpayal/devops-learn"
+            registryCredential = 'dockerhub-credentials'
+            dockerImage = ''
+    }
+    agent any
+    stages {
          stage('Maven build stage'){
              steps {
                  sh 'mvn clean install'
              }
          }
-         stage('Deploy locally'){
+         stage('Build Image'){
              steps {
-                dir('target') {
-                  sh 'jar -xf devopscalc-0.0.1-SNAPSHOT.jar'
+                script{
+                    dockerImage = docker.build registry + ":11"
                 }
              }
          }
-     }
- }
+         stage('Push to docker hub'){
+            steps{
+                script{
+                    docker.withRegistry('https://hub.docker.com/', registryCredential){
+                        dockerImage.push()
+                    }
+                }
+            }
+         }
+    }
+}
