@@ -1,5 +1,5 @@
 - hosts: servers
-  become: True
+  become: False
   tasks:
     - name: pull docker image
       docker_image:
@@ -9,6 +9,6 @@
     - name: Create container
       docker_container:
         name: test
-        image: sourabhpayal/devops-learn:latest
+        image: registry.hub.docker.com/sourabhpayal/devops-learn:latest
         ports:
           - "8090:8090"
