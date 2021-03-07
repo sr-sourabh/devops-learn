@@ -35,8 +35,10 @@ pipeline {
          }
          stage('Pushing tags to git'){
             steps{
-                sh 'git tag 2021.1.$BUILD_NUMBER'
-                sh 'git push origin 2021.1.$BUILD_NUMBER'
+                sshagent(['ddddddd']) {
+                    sh 'git tag 2021.1.$BUILD_NUMBER'
+                    sh 'git push origin 2021.1.$BUILD_NUMBER'
+                }
             }
          }
     }
