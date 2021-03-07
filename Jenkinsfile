@@ -33,5 +33,10 @@ pipeline {
                 sh 'docker rmi $registry:$BUILD_NUMBER'
             }
          }
+         stage('Pushing tags to git'){
+            steps{
+                sh 'git branch'
+            }
+         }
     }
 }
