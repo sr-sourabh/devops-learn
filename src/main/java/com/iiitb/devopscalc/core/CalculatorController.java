@@ -1,5 +1,6 @@
 package com.iiitb.devopscalc.core;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,9 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
+@Slf4j
 public class CalculatorController {
     @GetMapping(value = "/")
     public String showForm(Model model) {
+        log.info("Adding dummy request model");
         RequestDto requestDto = new RequestDto();
         model.addAttribute("request", requestDto);
         return "index";
@@ -30,6 +33,7 @@ public class CalculatorController {
         } else if (op == 4) {
             result = Math.pow(number, request.getBase());
         }
+        log.info("Request: {} ; Result: {}", request.toString(), result);
         model.addAttribute("result", result);
         return "index";
     }
