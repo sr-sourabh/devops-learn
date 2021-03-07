@@ -45,8 +45,21 @@ mvn clean install
 ### Deploy
 
 ``` 
+java -jar target/devopscalc-2021.1
+```
 
-jar -xf devopscalc-0.0.1-SNAPSHOT.jar 
-java -cp BOOT-INF/classes:BOOT-INF/lib/* com.iiitb.devopscalc.DevopscalcApplication
+### Docker
 
+```
+sudo systemctl disable docker.service
+sudo systemctl disable docker.socket
+sudo systemctl status docker
+docker run --name test -it image_name
+docker start -i test
+docker build -t devopscalc:latest .
+docker run --name test  -d  -p 8090:8090 devopscalc:latest
+docker logs -f test
+docker inspect -f "{{ .NetworkSettings.IPAddress }}" test
+service sshd status
+docker exec -it test top
 ```
