@@ -3,6 +3,7 @@ pipeline {
             registry = "sourabhpayal/devops-learn"
             registryCredential = 'dockerhub-credentials'
             dockerImage = ''
+            dockerImageLatest = ''
     }
     agent any
     stages {
@@ -15,6 +16,7 @@ pipeline {
              steps {
                 script{
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    dockerImageLatest = docker.build registry + ":latest"
                 }
              }
          }
@@ -23,6 +25,7 @@ pipeline {
                 script{
                     docker.withRegistry('https://registry.hub.docker.com/', registryCredential){
                         dockerImage.push()
+                        dockerImageLatest.push()
                     }
                 }
             }
