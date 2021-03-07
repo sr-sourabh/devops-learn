@@ -34,6 +34,7 @@ pipeline {
             steps{
                 sh 'docker rmi registry.hub.docker.com/$registry:$BUILD_NUMBER'
                 sh 'docker rmi $registry:$BUILD_NUMBER'
+                sh 'docker rmi -f $registry:latest'
             }
          }
          stage('Pushing tags to git'){
@@ -42,6 +43,11 @@ pipeline {
                     sh 'git tag 2021.1.$BUILD_NUMBER'
                     sh 'git push origin 2021.1.$BUILD_NUMBER'
                 }
+            }
+         }
+         stage('Ansible deploy to host'){
+            steps{
+                ansiblePlaybook disableHostKeyChecking: true, installation: 'ansible-tool', inventory: 'ansible/dev.inv', playbook: 'ansible/dev.yaml'
             }
          }
     }

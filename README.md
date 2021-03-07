@@ -36,3 +36,8 @@ docker inspect -f "{{ .NetworkSettings.IPAddress }}" test
 service sshd status
 docker exec -it test top 
 ```
+
+### Ansible
+```
+
+```

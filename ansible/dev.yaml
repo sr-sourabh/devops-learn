@@ -1,0 +1,14 @@
+- hosts: servers
+  become: True
+  tasks:
+    - name: pull docker image
+      docker_image:
+        name: sourabhpayal/devops-learn:latest
+        source: pull
+
+    - name: Create container
+      docker_container:
+        name: test
+        image: sourabhpayal/devops-learn:latest
+        ports:
+          - "8090:8090"
