@@ -27,5 +27,10 @@ pipeline {
                 }
             }
          }
+         stage('Clean up'){
+            steps{
+                sh 'docker rmi $registry:11'
+            }
+         }
     }
 }
