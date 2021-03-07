@@ -47,6 +47,7 @@ pipeline {
          }
          stage('Ansible deploy to host'){
             steps{
+                sh 'echo $USER'
                 ansiblePlaybook disableHostKeyChecking: true, installation: 'ansible-tool', inventory: 'ansible/dev.inv', playbook: 'ansible/dev.yaml'
             }
          }
