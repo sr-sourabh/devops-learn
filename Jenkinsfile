@@ -57,12 +57,15 @@ pipeline {
     post {
             success {
                 status = 'SUCCESS'
+                echo '${status}'
             }
             unstable {
                 status = 'UNSTABLE'
+                echo '${status}'
             }
             failure {
                 status = 'FAILED'
+                echo '${status}'
             }
             always {
                 mail to: 'devops-learn@mailinator.com',
