@@ -57,7 +57,7 @@ pipeline {
             always {
                 mail to: 'devops-learn@mailinator.com',
                      subject: "${currentBuild.currentResult} Pipeline: ${currentBuild.fullDisplayName}",
-                     body: " "
+                     body: "placeholder"
             }
         }
 }
