@@ -1,6 +1,6 @@
 pipeline {
     environment {
-            registry = "sourabhpayal/devops-learn"
+            registry = "registry.hub.docker.com/sourabhpayal/devops-learn"
             registryCredential = 'dockerhub-credentials'
             dockerImage = ''
             dockerImageLatest = ''
@@ -15,8 +15,7 @@ pipeline {
          stage('Build Image'){
              steps {
                 script{
-                    sh 'docker rmi -f registry.hub.docker.com/sourabhpayal/devops-learn:latest &>/dev/null && echo \'Removed old latest image\' '
-                    sh 'docker rmi -f sourabhpayal/devops-learn:latest &>/dev/null && echo \'Removed old latest image\' '
+                    sh 'docker rmi -f $registry:latest &>/dev/null && echo \'Removed old latest image\' '
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                     dockerImageLatest = docker.build registry + ":latest"
                 }
@@ -34,7 +33,6 @@ pipeline {
          }
          stage('Clean up'){
             steps{
-                sh 'docker rmi registry.hub.docker.com/$registry:$BUILD_NUMBER'
                 sh 'docker rmi $registry:$BUILD_NUMBER'
                 sh 'docker rmi -f $registry:latest'
             }
