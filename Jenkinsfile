@@ -15,6 +15,8 @@ pipeline {
          stage('Build Image'){
              steps {
                 script{
+                    sh 'docker rmi -f registry.hub.docker.com/sourabhpayal/devops-learn:latest &>/dev/null && echo \'Removed old latest image\' '
+                    sh 'docker rmi -f sourabhpayal/devops-learn:latest &>/dev/null && echo \'Removed old latest image\' '
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                     dockerImageLatest = docker.build registry + ":latest"
                 }
@@ -48,7 +50,6 @@ pipeline {
          stage('Ansible deploy to host'){
             steps{
                 sh 'docker rm -f test &>/dev/null && echo \'Removed old container\' '
-                sh 'docker rmi -f registry.hub.docker.com/sourabhpayal/devops-learn:latest &>/dev/null && echo \'Removed old latest image\' '
                 ansiblePlaybook disableHostKeyChecking: true, installation: 'ansible-tool', inventory: 'ansible/dev.inv', playbook: 'ansible/dev.yaml'
             }
          }
