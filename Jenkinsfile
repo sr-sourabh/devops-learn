@@ -4,6 +4,7 @@ pipeline {
             registryCredential = 'dockerhub-credentials'
             dockerImage = ''
             dockerImageLatest = ''
+            status = ''
     }
     agent any
     stages {
@@ -53,4 +54,20 @@ pipeline {
             }
          }
     }
+    post {
+            success {
+                status = 'SUCCESS'
+            }
+            unstable {
+                status = 'UNSTABLE'
+            }
+            failure {
+                status = 'FAILED'
+            }
+            always {
+                mail to: 'devops-learn@mailinator.com',
+                     subject: "${status} Pipeline: ${currentBuild.fullDisplayName}",
+                     body: " "
+            }
+        }
 }
