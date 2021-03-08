@@ -53,11 +53,11 @@ pipeline {
             }
          }
     }
-    post {
+    /* post {
             always {
                 mail to: 'devops-learn@mailinator.com',
                      subject: "${currentBuild.currentResult} Pipeline: ${currentBuild.fullDisplayName}",
                      body: "placeholder"
             }
-        }
+        } */
 }
