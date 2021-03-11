@@ -14,14 +14,14 @@ class CalculatorControllerTest {
     CalculatorController underTest;
 
     @Test
-    public void testShowForm() {
+    public void testShowForm() throws Exception {
         Model model = new ConcurrentModel();
         underTest.showForm(model);
         Assertions.assertNotNull(model.getAttribute("request"));
     }
 
     @Test
-    public void testGetResult_log() {
+    public void testGetResult_log() throws Exception {
         Model model = new ConcurrentModel();
         RequestDto request = new RequestDto();
         request.setNumber(8);
@@ -33,7 +33,7 @@ class CalculatorControllerTest {
     }
 
     @Test
-    public void testGetResult_sqrt() {
+    public void testGetResult_sqrt() throws Exception {
         Model model = new ConcurrentModel();
         RequestDto request = new RequestDto();
         request.setNumber(9);
@@ -45,7 +45,7 @@ class CalculatorControllerTest {
     }
 
     @Test
-    public void testGetResult_factorial() {
+    public void testGetResult_factorial() throws Exception {
         Model model = new ConcurrentModel();
         RequestDto request = new RequestDto();
         request.setNumber(5);
@@ -57,7 +57,7 @@ class CalculatorControllerTest {
     }
 
     @Test
-    public void testGetResult_power() {
+    public void testGetResult_power() throws Exception {
         Model model = new ConcurrentModel();
         RequestDto request = new RequestDto();
         request.setNumber(2);
@@ -67,6 +67,34 @@ class CalculatorControllerTest {
 
         Assertions.assertNotNull(model.getAttribute("result"));
         Assertions.assertEquals("8.0", model.getAttribute("result").toString());
+    }
+
+    @Test
+    public void testGetResult_sqrt_negativeNumbers() throws Exception {
+        Model model = new ConcurrentModel();
+        RequestDto request = new RequestDto();
+        request.setNumber(-9);
+        request.setOperation(2);
+        try {
+            underTest.getResult(request, model);
+        } catch (Exception e) {
+            Assertions.assertNotNull(e.getMessage());
+            Assertions.assertEquals("Number should be positive", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testGetResult_log_negativeNumbers() throws Exception {
+        Model model = new ConcurrentModel();
+        RequestDto request = new RequestDto();
+        request.setNumber(-8);
+        request.setOperation(1);
+        try {
+            underTest.getResult(request, model);
+        } catch (Exception e) {
+            Assertions.assertNotNull(e.getMessage());
+            Assertions.assertEquals("Number should be positive", e.getMessage());
+        }
     }
 
 }

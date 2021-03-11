@@ -1,5 +1,24 @@
 # Devops
 
+### Problem Statement
+
+Create a scientific calculator program with user menu driven operations
+
+* Square root function
+* Factorial function
+* Natural logarithm
+* Power function
+
+### Devops toolchain used
+
+1. Source control management: GitHub
+2. Testing: Junit
+3. Build: Maven
+4. Continuos integration: Jenikins
+5. Containerize: Docker and docker hub
+6. Deployement and configuration management: Ansible
+7. Monitoring: ElasticSearch, Logstash, Kibana
+
 ### Jenkins
 
  ```
@@ -10,12 +29,10 @@
 ### Build
 
 ```
-
 mvn clean install
-
 ```
 
-### Deploy
+### Deploy (Manual)
 
 ``` 
 java -jar target/devopscalc-2021.1.war
@@ -37,7 +54,8 @@ service sshd status
 docker exec -it test top 
 ```
 
-### Ansible
-```
+### ELK
 
+```
+sh logstash.sh -f logstash.conf
 ```
