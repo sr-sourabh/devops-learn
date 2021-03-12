@@ -19,24 +19,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculator App</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form action="#" th:action="@{/getResult}" th:object="${request}" method="post">
+<div style="margin: 10em">
 
-    <input type="number" th:field="*{number}"/>
-    <input type="number" th:field="*{base}" id="base-field"/>
-    <select th:field="*{operation}" id="selected-operation" onchange="showIfPowerSelected()">
-        <option th:value="1" th:text="Log"></option>
-        <option th:value="2" th:text="'Square Root'"></option>
-        <option th:value="3" th:text="'Factorial'"></option>
-        <option th:value="4" th:text="'Power'"></option>
-    </select>
-    <input type="submit" value="Submit"/>
-    <br>
-</form>
+    <form action="#" th:action="@{/getResult}" th:object="${request}" method="post">
+        <div class="input-group input-group-lg">
+            <input type="number" th:field="*{number}" class="form-control"
+                   aria-describedby="inputGroup-sizing-sm" placeholder="Enter a number"/>
+            <br>
+            <input type="number" th:field="*{base}" id="base-field" class="form-control"
+                   aria-describedby="inputGroup-sizing-sm"/>
+            <br>
+            <div>
+                <select th:field="*{operation}" id="selected-operation" onchange="showIfPowerSelected()"
+                        class="form-control" aria-describedby="inputGroup-sizing-sm">
+                    <option th:value="1" th:text="Log"></option>
+                    <option th:value="2" th:text="'Square Root'"></option>
+                    <option th:value="3" th:text="'Factorial'"></option>
+                    <option th:value="4" th:text="'Power'"></option>
+                </select>
+            </div>
+            <br>
+            <input type="submit" value="Submit" class="form-control"
+                   aria-describedby="inputGroup-sizing-sm" style="color: blue"/>
+            <br>
+            <br>
+            <span th:text="${result}" class="form-control"
+                  aria-describedby="inputGroup-sizing-sm"/>
+        </div>
+        <br>
+    </form>
 
-<br>
-<span th:text="${result}"/>
+</div>
 
 </body>
 </html>
